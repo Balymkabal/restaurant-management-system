@@ -1,4 +1,5 @@
 package com.restaurant.dao;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
@@ -10,9 +11,11 @@ public class DBConnection {
 
     public static Connection getConnection() {
         try {
+
             if (connection == null) {
 
                 Properties props = new Properties();
+
                 InputStream input = DBConnection.class
                         .getClassLoader()
                         .getResourceAsStream("database.properties");
@@ -25,7 +28,8 @@ public class DBConnection {
 
                 connection = DriverManager.getConnection(url, user, password);
 
-                System.out.println("✅ Connected to MySQL!");
+                System.out.println("✅ Database connected!");
+
             }
 
         } catch (Exception e) {
