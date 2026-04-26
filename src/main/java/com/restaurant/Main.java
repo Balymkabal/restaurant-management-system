@@ -6,6 +6,7 @@ import com.restaurant.dao.MenuDAO;
 import com.restaurant.dao.OrderDAO;
 import com.restaurant.threads.OrderProcessingThread;
 import com.restaurant.network.Client;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,7 +33,36 @@ public class Main {
             thread.start();
 
             // 6. Отправка на кухню (socket)
-            Client.sendOrder("Pizza");
+            String[] menuItems = {
+                    "Pizza",
+                    "Tea",
+                    "Burger",
+                    "Cheese Shawarma",
+                    "12 Wings Basket",
+                    "Rice",
+                    "Caesar Salad",
+                    "8 Nuggets",
+                    "Cola",
+                    "Fanta",
+                    "Juice",
+                    "Fuze Tea",
+                    "Ketchup",
+                    "Naan",
+                    "French Fries",
+                    "Philadelphia Roll",
+                    "Tempura Roll"
+            };
+
+            Random random = new Random();
+
+            for (int i = 0; i < 3; i++) {
+
+                String randomItem = menuItems[random.nextInt(menuItems.length)];
+
+                System.out.println("Client order: " + randomItem);
+
+                Client.sendOrder(randomItem);
+            }
 
         } else {
             System.out.println("❌ Login failed");
