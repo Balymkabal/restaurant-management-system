@@ -7,6 +7,10 @@ import com.restaurant.dao.OrderDAO;
 import com.restaurant.threads.OrderProcessingThread;
 import com.restaurant.network.Client;
 import java.util.Random;
+import com.restaurant.model.Admin;
+import com.restaurant.model.Waiter;
+import com.restaurant.model.User;
+import com.restaurant.util.SerializationUtil;
 
 public class Main {
     public static void main(String[] args) {
@@ -67,5 +71,16 @@ public class Main {
         } else {
             System.out.println("❌ Login failed");
         }
+
+        Admin admin = new Admin(1, "Beka", "admin", "1234");
+        Waiter waiter = new Waiter(2, "Ali", "waiter", "1111");
+
+        admin.dashboard();
+        waiter.dashboard();
+
+        User user = new User(1, "Beka", "admin", "1234", "ADMIN");
+        SerializationUtil.saveObject(user, "user.dat");
+        User loadedUser = (User) SerializationUtil.readObject("user.dat");
+        System.out.println("Loaded user: " + loadedUser.getUsername());
     }
 }
